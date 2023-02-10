@@ -4,11 +4,24 @@ import subprocess
 import os
 import time
 
+import requests
+
+audio_url = "http://200.137.217.155:8010/radiouniversitaria"
+audio_filename = "live_audio.mp3"
+
+r = requests.get(audio_url, stream=True)
+
+with open(audio_filename, "wb") as f:
+    for chunk in r.iter_content(chunk_size=1024):
+        f.write(chunk)
+        
+        
+        
 # URL do stream de vídeo
 video_url = "https://5a7d54e35f9d2.streamlock.net/morromendanha1/morromendanha1.stream/chunklist_w182959856.m3u8"
 
 # URL do stream de áudio
-audio_url = "http://200.137.217.155:8010/radiouniversitaria"
+audio_url = "live_audio.mp3"
 
 # Tempo de captura de cada frame (em segundos)
 capture_time = 2
